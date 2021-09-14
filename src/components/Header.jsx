@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import LoadingGen from './LoadingGen';
 
@@ -35,6 +36,11 @@ class Header extends Component {
         <h4 data-testid="header-user-name">
           {loading ? <LoadingGen /> : name}
         </h4>
+        <div>
+          <Link to="/search" data-testid="link-to-search">Search</Link>
+          <Link to="/favorites" data-testid="link-to-favorites">Favorites</Link>
+          <Link to="/profile" data-testid="link-to-profile">Profile</Link>
+        </div>
       </header>
     );
   }
