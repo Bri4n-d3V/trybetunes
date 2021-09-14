@@ -37,7 +37,7 @@ class Login extends Component {
 
   render() {
     const { name, loading, redirect } = this.state;
-    const MIN_INPUTS = 3;
+    const MIN_CHARACTERS = 3;
 
     if (loading) return <LoadingGen />;
     if (redirect) return <Redirect to="/search" />;
@@ -58,7 +58,7 @@ class Login extends Component {
         <button
           type="submit"
           data-testid="login-submit-button"
-          disabled={ name.length < MIN_INPUTS } // Lógica dentro do atributo (Léo)
+          disabled={ name.length < MIN_CHARACTERS } // Lógica dentro do atributo (Léo)
           onClick={ this.handleSubmit }
         >
           Entrar
