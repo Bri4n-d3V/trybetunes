@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class ArtistCard extends Component {
   render() {
     const { artist } = this.props;
+    const { artworkUrl100, collectionName, trackCount, collectionId } = artist;
 
     return (
       <div>
-        <img src={ artist.artworkUrl100 } alt={ artist.collectionName } />
-        <h4>{artist.collectionName}</h4>
-        <p>{`${artist.trackCount} músicas`}</p>
-        {/* <p>{ artist.releaseDate }</p> */}
+        <img src={ artworkUrl100 } alt={ collectionName } />
+        <h4>{collectionName}</h4>
+        <p>{`${trackCount} músicas`}</p>
+        {/* <p>{ releaseDate }</p> */}
         <Link
-          to={ `/album/${artist.collectionId}` }
-          data-testid={ `link-to-album-${artist.collectionId}` }
+          to={ `/album/${collectionId}` }
+          data-testid={ `link-to-album-${collectionId}` }
         >
           mais informações
         </Link>
@@ -21,5 +23,13 @@ class ArtistCard extends Component {
     );
   }
 }
+
+ArtistCard.propTypes = {
+  artist: PropTypes.string.isRequired,
+  artworkUrl100: PropTypes.string.isRequired,
+  collectionName: PropTypes.string.isRequired,
+  trackCount: PropTypes.number.isRequired,
+  collectionId: PropTypes.number.isRequired,
+};
 
 export default ArtistCard;
