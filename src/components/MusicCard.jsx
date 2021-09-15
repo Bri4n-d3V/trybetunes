@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import LoadingGen from './LoadingGen';
 import { addSong, removeSong } from '../services/favoriteSongsAPI';
 
@@ -53,5 +53,9 @@ class MusicCard extends Component {
     );
   }
 }
+
+MusicCard.propTypes = {
+  song: PropTypes.shape().isRequired,
+};
 
 export default MusicCard;
