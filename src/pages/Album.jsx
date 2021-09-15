@@ -29,7 +29,6 @@ class Album extends Component {
     });
     const { match: { params: { id } } } = this.props;
     const songs = await getMusics(id);
-    console.log(songs);
     this.setState({
       songs,
       artist: songs[0].artistName,
