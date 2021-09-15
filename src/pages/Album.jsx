@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
+import LoadingGen from '../components/LoadingGen';
 
 class Album extends Component {
   constructor() {
@@ -13,41 +14,51 @@ class Album extends Component {
       artist: '',
       album: '',
       api: false,
+      loading: false,
     };
   }
 
   componentDidMount() {
-    this.handleAPI();
+    this.handleGetMusics();
   }
 
-  handleAPI = async () => {
+  handleGetMusics = async () => {
+    this.setState({
+      loading: true,
+    });
     const { match: { params: { id } } } = this.props;
     const songs = await getMusics(id);
-    // console.log(songs);
     this.setState({
       songs,
       artist: songs[0].artistName,
       album: songs[0].collectionName,
       api: true,
+      loading: false,
     });
-  };
+  }
 
   renderResults = () => {
-    const { songs, artist, album, api } = this.state;
+    const { songs, artist, album, api, loading } = this.state;
 
-    if (api) {
+    if (loading) return <LoadingGen />;
+
+    if (api && !loading) {
       return (
         <div>
           <h4 data-testid="artist-name">{artist}</h4>
           <h4 data-testid="album-name">{album}</h4>
-          {songs.map((song, i) => i > 0 && <MusicCard key={ i } { ...song } />)}
+          {songs.map(
+            (song, i) => i > 0 && <MusicCard
+              key={ i }
+              song={ song }
+            />,
+          )}
         </div>
       );
     }
   }
 
   render() {
-    // const {  } = this.state;
     return (
       <div data-testid="page-album">
         <Header />
