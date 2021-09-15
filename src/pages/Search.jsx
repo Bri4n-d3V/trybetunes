@@ -42,7 +42,7 @@ class Search extends Component {
   }
 
   renderForm = () => {
-    const { name, loading, artist, artistName } = this.state;
+    const { name } = this.state;
     const MIN_CHARACTERS = 2;
 
     return (
