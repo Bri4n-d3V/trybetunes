@@ -41,34 +41,6 @@ class Search extends Component {
     });
   }
 
-  renderForm = () => {
-    const { name } = this.state;
-    const MIN_CHARACTERS = 2;
-
-    return (
-      <form>
-        <label htmlFor="name">
-          <input
-            type="text"
-            name="name"
-            value={ name }
-            onChange={ this.handleChange }
-            placeholder="Pesquise por banda ou artista."
-            data-testid="search-artist-input"
-          />
-        </label>
-        <button
-          type="button"
-          data-testid="search-artist-button"
-          disabled={ name.length < MIN_CHARACTERS }
-          onClick={ this.handleClick }
-        >
-          Pesquisar
-        </button>
-      </form>
-    );
-  }
-
   renderConditions = () => {
     const { artistName, loading, artist, searchSuccess } = this.state;
 
@@ -95,10 +67,31 @@ class Search extends Component {
   }
 
   render() {
+    const { name } = this.state;
+    const MIN_CHARACTERS = 2;
     return (
       <div data-testid="page-search">
         <Header />
-        {this.renderForm()}
+        <form>
+          <label htmlFor="name">
+            <input
+              type="text"
+              name="name"
+              value={ name }
+              onChange={ this.handleChange }
+              placeholder="Pesquise por banda ou artista."
+              data-testid="search-artist-input"
+            />
+          </label>
+          <button
+            type="button"
+            data-testid="search-artist-button"
+            disabled={ name.length < MIN_CHARACTERS }
+            onClick={ this.handleClick }
+          >
+            Pesquisar
+          </button>
+        </form>
         {this.renderConditions()}
       </div>
     );
