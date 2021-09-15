@@ -13,6 +13,7 @@ class Album extends Component {
       songs: [],
       artist: '',
       album: '',
+      image: '',
       api: false,
       loading: false,
     };
@@ -28,17 +29,19 @@ class Album extends Component {
     });
     const { match: { params: { id } } } = this.props;
     const songs = await getMusics(id);
+    console.log(songs);
     this.setState({
       songs,
       artist: songs[0].artistName,
       album: songs[0].collectionName,
+      image: songs[0].artworkUrl100,
       api: true,
       loading: false,
     });
   }
 
   renderResults = () => {
-    const { songs, artist, album, api, loading } = this.state;
+    const { songs, artist, album, image, api, loading } = this.state;
 
     if (loading) return <LoadingGen />;
 
@@ -47,6 +50,7 @@ class Album extends Component {
         <div>
           <h4 data-testid="artist-name">{artist}</h4>
           <h4 data-testid="album-name">{album}</h4>
+          <img src={ image } alt={ `Capa do album ${image}` } />
           {songs.map(
             (song, i) => i > 0 && <MusicCard
               key={ i }
