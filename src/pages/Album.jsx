@@ -49,7 +49,7 @@ class Album extends Component {
         <div>
           <h4 data-testid="artist-name">{artist}</h4>
           <h4 data-testid="album-name">{album}</h4>
-          <img src={ image } alt={ `Capa do album ${image}` } />
+          <img src={ image } alt={ `Capa do album ${album}` } />
           {songs.map(
             (song, i) => i > 0 && <MusicCard
               key={ i }
